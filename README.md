@@ -35,13 +35,23 @@ launchctl unload -w daily_maintenance.plist
 rm $HOME/Library/LaunchAgents/daily_maintenance.plist
 ```
 
-### Start/stop a plist script registered to launchd
-Start:
+### Useful command for launchd
+Start the script:
 ```shell
 launchctl start com.bicio.daily_maintenance.agent
 ```
 
-Stop:
+Stop the script:
 ```shell
 launchctl stop com.bicio.daily_maintenance.agent
+```
+
+List registered agents and search for the daily maintenance script:
+```shell
+launchctl list | grep daily_maintenance
+```
+
+Remove the daily maintenance agent from launchd
+```shell
+launchctl remove com.bicio.daily_maintenance.agent
 ```
