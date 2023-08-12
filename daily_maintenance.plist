@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>com.bicio.daily_maintenance.agent</string>
+        <key>UserName</key>
+        <string>bicio</string>
+        <key>Program</key>
+        <string>/Users/bicio/.bin/daily_maintenace</string>
+        <key>StandardOutPath</key>
+        <string>/Users/bicio/.bin/logs/logfile.log</string><!-- /dev/null -->
+        <key>StandardErrorPath</key>
+        <string>/Users/bicio/.bin/logs/logfile.log</string>
+        <key>RunAtLoad</key>
+        <true/>
+        <key>StartInterval</key>
+        <integer>14400</integer>
+        <key>StartCalendarInterval</key>
+        <dict>
+            <key>Hour</key>
+            <integer>10</integer>
+            <key>Minute</key>
+            <integer>00</integer>
+        </dict>
+    </dict>
+</plist>

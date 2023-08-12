@@ -1,0 +1,79 @@
+#!/bin/zsh
+
+### Script that executes daily maintenance commands
+
+### How to call script:
+# "update_daily" => logs to stdout
+# "update_daily file" => logs only to file
+# "update_daily both" => logs to file and stdout
+
+# Home folder where to save logs
+PERSONAL_HOME_FOLDER="/Users/bicio"
+LOG_DEST_FOLDER="$PERSONAL_HOME_FOLDER/.bin/logs"
+
+# true for not logging to stdout, false to log to stdout
+SILENT=false
+# true to save to file, otherwise put logs only to stdout/stderr
+LOGS_FILE=false
+# check $1 parameter is "file", in that case we save logs to file
+if [ ! -z "$1" ] && [ "$1" = "file" ]; then
+    # logs only to file
+    LOGS_FILE=true
+    SILENT=true
+elif [ ! -z "$1" ] && [ "$1" = "both" ]; then
+    # logs to file and stdout
+    LOGS_FILE=true
+    SILENT=false
+else 
+    # logs to stdout
+    LOGS_FILE=false
+    SILENT=false
+fi
+
+# create folder for log files
+if [ $LOGS_FILE = true ] && [ ! -e ${LOG_DEST_FOLDER} ]; then
+    echo "Creating folder $LOG_DEST_FOLDER"
+    mkdir -p ${LOG_DEST_FOLDER}
+fi
+
+################################
+#### BEGIN helper functions ####
+################################
+RED='\033[0;31m' # Red logs
+NC='\033[0m' # Disable color
+
+LOG_FILE_PATH="$LOG_DEST_FOLDER/os_update_$(date +%Y%m%d).log"
+
+cmd() {
+    if [ $LOGS_FILE = true ] && [ $SILENT = false ]; then
+        # logs to stdout and file
+        eval "$1" |& tee -a $LOG_FILE_PATH
+    elif [ $LOGS_FILE = true ] && [ $SILENT = true ]; then
+        # logs only to file
+        eval "$1" >> $LOG_FILE_PATH 2>&1
+    else
+        # logs to stdout
+        eval "$1"
+    fi
+}
+################################
+#### END helper functions ####
+################################
+
+######################################
+##### DAILY MAINTENANCE COMMANDS #####
+######################################
+
+# Update Brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+cmd "echo -e \"${RED}Updating Brew...${NC}\""
+cmd "brew update"
+cmd "echo -e \"${RED}Upgrading Brew packages...${NC}\""
+cmd "brew upgrade"
+cmd "echo -e \"${RED}Cleanup Brew...${NC}\""
+cmd "brew cleanup"
+
+# Update OMZ
+cmd "echo -e \"\n${RED}Start updating Oh My Zsh...${NC}\""
+eval "source $PERSONAL_HOME_FOLDER/.zshrc"
+cmd "omz update"
