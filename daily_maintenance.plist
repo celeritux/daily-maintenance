@@ -16,9 +16,11 @@
         <!-- Set <string>/dev/null</string> for silence it -->
         <key>StandardErrorPath</key>
         <string>/Users/bicio/.bin/logs/logfile.log</string>
-        <!-- Run at: load, every 4h and daily at 10am -->
-        <key>RunAtLoad</key>
-        <true />
+        <!-- Run every 4h and daily at 10am -->
+        <!--
+            <key>RunAtLoad</key>
+            <true />
+        -->
         <key>StartInterval</key>
         <integer>14400</integer>
         <key>StartCalendarInterval</key>
