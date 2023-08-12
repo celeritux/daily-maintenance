@@ -6,14 +6,19 @@
         <string>com.bicio.daily_maintenance.agent</string>
         <key>UserName</key>
         <string>bicio</string>
-        <key>Program</key>
-        <string>/Users/bicio/.bin/daily_maintenace</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/Users/bicio/.bin/daily_maintenance</string>
+            <string>file</string>
+        </array>
         <key>StandardOutPath</key>
-        <string>/Users/bicio/.bin/logs/logfile.log</string><!-- /dev/null -->
+        <string>/Users/bicio/.bin/logs/logfile.log</string>
+        <!-- Set <string>/dev/null</string> for silence it -->
         <key>StandardErrorPath</key>
         <string>/Users/bicio/.bin/logs/logfile.log</string>
+        <!-- Run at: load, every 4h and daily at 10am -->
         <key>RunAtLoad</key>
-        <true/>
+        <true />
         <key>StartInterval</key>
         <integer>14400</integer>
         <key>StartCalendarInterval</key>
