@@ -64,6 +64,10 @@ cmd() {
 ##### DAILY MAINTENANCE COMMANDS #####
 ######################################
 
+if [ $LOGS_FILE = true ]; then
+    cmd "echo -e \"Run[$(date +\"%Y%m%d@%H:%M\")]\""
+fi
+
 # Update Brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 cmd "echo -e \"${RED}Updating Brew...${NC}\""
