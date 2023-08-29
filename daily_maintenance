@@ -42,7 +42,7 @@ fi
 RED='\033[0;31m' # Red logs
 NC='\033[0m' # Disable color
 
-LOG_FILE_PATH="$LOG_DEST_FOLDER/os_update_$(date +%Y%m%d).log"
+LOG_FILE_PATH="$LOG_DEST_FOLDER/daily_maintenance_$(date +%Y%m%d).log"
 
 cmd() {
     if [ $LOGS_FILE = true ] && [ $SILENT = false ]; then
