@@ -10,6 +10,7 @@
 # Home folder where to save logs
 PERSONAL_HOME_FOLDER="/Users/bicio"
 LOG_DEST_FOLDER="$PERSONAL_HOME_FOLDER/.bin/logs"
+KEEP_LOGS_DAYS=5
 
 # true for not logging to stdout, false to log to stdout
 SILENT=false
@@ -81,3 +82,6 @@ cmd "brew cleanup"
 cmd "echo -e \"\n${RED}Start updating Oh My Zsh...${NC}\""
 eval "source $PERSONAL_HOME_FOLDER/.zshrc"
 cmd "omz update"
+
+# Cleanup older logs
+find $LOG_DEST_FOLDER -name "*.log" -mtime +$KEEP_LOGS_DAYS -delete
